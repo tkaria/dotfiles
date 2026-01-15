@@ -70,7 +70,16 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+  git
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  fast-syntax-highlighting
+  zsh-autocomplete
+  docker
+  kubectl
+  history-substring-search
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -95,7 +104,119 @@ source $ZSH/oh-my-zsh.sh
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# ===== Custom Aliases =====
+
+# Navigation
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias ~="cd ~"
+
+# List files
+alias l="ls -lah"
+alias ll="ls -lh"
+alias la="ls -lAh"
+
+# Git shortcuts (beyond oh-my-zsh git plugin)
+alias gst="git status"
+alias gco="git checkout"
+alias gcm="git checkout main"
+alias gp="git push"
+alias gpl="git pull"
+alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
+# Directory shortcuts
+alias dt="cd ~/Desktop"
+alias dl="cd ~/Downloads"
+alias dev="cd ~/dev"
+
+# System
+alias reload="source ~/.zshrc"
+alias zshconfig="vim ~/.zshrc"
+alias vimconfig="vim ~/.vimrc"
+
+# Useful utilities
+alias grep="grep --color=auto"
+alias h="history"
+alias c="clear"
+
+# ===== Environment Variables =====
+
+# Preferred editor
+export EDITOR='vim'
+export VISUAL='vim'
+
+# History configuration
+HISTSIZE=10000
+SAVEHIST=10000
+setopt EXTENDED_HISTORY          # Write the history file in the ':start:elapsed;command' format
+setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits
+setopt SHARE_HISTORY             # Share history between all sessions
+setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again
+setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate
+setopt HIST_FIND_NO_DUPS         # Do not display a line previously found
+setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space
+setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file
+setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry
+
+# ===== Custom Functions =====
+
+# Create a new directory and enter it
+mkcd() {
+  mkdir -p "$@" && cd "$_"
+}
+
+# Extract any archive
+extract() {
+  if [ -f $1 ] ; then
+    case $1 in
+      *.tar.bz2)   tar xjf $1     ;;
+      *.tar.gz)    tar xzf $1     ;;
+      *.bz2)       bunzip2 $1     ;;
+      *.rar)       unrar e $1     ;;
+      *.gz)        gunzip $1      ;;
+      *.tar)       tar xf $1      ;;
+      *.tbz2)      tar xjf $1     ;;
+      *.tgz)       tar xzf $1     ;;
+      *.zip)       unzip $1       ;;
+      *.Z)         uncompress $1  ;;
+      *.7z)        7z x $1        ;;
+      *)           echo "'$1' cannot be extracted via extract()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
+}
+
+# ===== OS-specific configurations =====
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  # macOS specific settings
+
+  # Homebrew
+  if [[ -f /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  elif [[ -f /usr/local/bin/brew ]]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+  fi
+
+  # macOS aliases
+  alias showfiles="defaults write com.apple.finder AppleShowAllFiles YES; killall Finder"
+  alias hidefiles="defaults write com.apple.finder AppleShowAllFiles NO; killall Finder"
+
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  # Linux specific settings
+
+  # Use better ls colors
+  if [ -x /usr/bin/dircolors ]; then
+    eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+  fi
+fi
+
+# ===== Load local customizations =====
+# Create ~/.zshrc.local for machine-specific settings
+if [[ -f ~/.zshrc.local ]]; then
+  source ~/.zshrc.local
+fi
