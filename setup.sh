@@ -117,6 +117,12 @@ install_macos_deps() {
     print_info "Installing essential tools via Homebrew..."
     brew install git vim zsh fzf ripgrep
 
+    # Install NerdFonts
+    print_info "Installing NerdFonts..."
+    brew tap homebrew/cask-fonts
+    brew install --cask font-blex-mono-nerd-font
+    print_success "BlexMono Nerd Font installed"
+
     # Configure macOS settings
     print_info "Configuring macOS settings..."
 
@@ -155,6 +161,45 @@ install_linux_deps() {
     fi
 
     print_success "Essential tools installed"
+}
+
+# Install NerdFonts for Linux
+install_nerdfonts_linux() {
+    print_info "Installing BlexMono Nerd Font..."
+
+    local fonts_dir="$HOME/.local/share/fonts"
+    local font_name="BlexMono"
+
+    # Create fonts directory if it doesn't exist
+    mkdir -p "$fonts_dir"
+
+    # Check if font is already installed
+    if fc-list | grep -qi "blex"; then
+        print_success "BlexMono Nerd Font already installed"
+        return
+    fi
+
+    # Download and install BlexMono Nerd Font
+    local temp_dir=$(mktemp -d)
+    cd "$temp_dir"
+
+    print_info "Downloading BlexMono Nerd Font..."
+    curl -fLo "${font_name}.zip" \
+        https://github.com/ryanoasis/nerd-fonts/releases/latest/download/IBMPlexMono.zip
+
+    print_info "Extracting fonts..."
+    unzip -q "${font_name}.zip" -d "$fonts_dir"
+
+    # Clean up
+    cd - > /dev/null
+    rm -rf "$temp_dir"
+
+    # Refresh font cache
+    print_info "Refreshing font cache..."
+    fc-cache -fv > /dev/null 2>&1
+
+    print_success "BlexMono Nerd Font installed"
+    print_info "You may need to select the font in your terminal settings"
 }
 
 # Install oh-my-zsh
@@ -270,6 +315,8 @@ main() {
         install_macos_deps
     elif [ "$OS" = "linux" ]; then
         install_linux_deps
+        echo ""
+        install_nerdfonts_linux
     fi
     echo ""
 
@@ -293,9 +340,10 @@ main() {
     echo ""
     print_info "Next steps:"
     echo "  1. Update .gitconfig with your name and email"
-    echo "  2. Restart your terminal or run: source ~/.zshrc"
-    echo "  3. Open vim and run :PlugInstall to install vim plugins"
-    echo "  4. (Optional) Customize settings in ~/.zshrc.local"
+    echo "  2. Set your terminal font to 'BlexMono Nerd Font' for best experience"
+    echo "  3. Restart your terminal or run: source ~/.zshrc"
+    echo "  4. Open vim and run :PlugInstall to install vim plugins"
+    echo "  5. (Optional) Customize settings in ~/.zshrc.local"
     echo ""
 }
 
