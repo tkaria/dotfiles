@@ -38,11 +38,18 @@ My personal dotfiles for vim, git, and zsh. Works on both macOS and Linux.
 - URL shortcuts (gh:, gist:)
 - Auto-correct for mistyped commands
 
+### Fonts
+- **BlexMono Nerd Font** (IBM Plex Mono patched with icons)
+- Installed automatically on both macOS and Linux
+- Enables powerline symbols in vim-airline
+- Provides icon glyphs for enhanced terminal experience
+
 ### Setup Script (setup.sh)
 - Automatic OS detection (macOS/Linux)
 - Backs up existing dotfiles with timestamp
 - Creates symlinks to dotfiles
 - Installs required tools and dependencies
+- Installs BlexMono Nerd Font
 - Sets up oh-my-zsh and plugins
 - Installs vim-plug
 - Sets zsh as default shell
@@ -65,9 +72,10 @@ The setup script will:
 2. Backup existing dotfiles to `~/dotfiles_backup_TIMESTAMP`
 3. Create symlinks from your home directory to this repository
 4. Install necessary tools (Homebrew on macOS, apt/yum/pacman on Linux)
-5. Install oh-my-zsh and plugins
-6. Install vim-plug
-7. Set zsh as your default shell
+5. Install BlexMono Nerd Font
+6. Install oh-my-zsh and plugins
+7. Install vim-plug
+8. Set zsh as your default shell
 
 ### Manual Installation
 
@@ -93,7 +101,17 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 ## Post-Installation
 
-### 1. Configure Git User Information
+### 1. Configure Terminal Font
+
+Set your terminal to use **BlexMono Nerd Font** for the best experience:
+
+- **iTerm2** (macOS): Preferences → Profiles → Text → Font → Select "BlexMono Nerd Font"
+- **Terminal.app** (macOS): Preferences → Profiles → Font → Change → Select "BlexMono Nerd Font"
+- **GNOME Terminal** (Linux): Preferences → Profile → Custom font → Select "BlexMono Nerd Font"
+- **Alacritty**: Edit `~/.config/alacritty/alacritty.yml` and set `font.normal.family: "BlexMono Nerd Font"`
+- **VSCode**: Set `"terminal.integrated.fontFamily": "BlexMono Nerd Font Mono"`
+
+### 2. Configure Git User Information
 
 Edit `.gitconfig` and add your name and email:
 
@@ -104,7 +122,7 @@ git config --global user.email "your.email@example.com"
 
 Or uncomment and edit the user section in `~/.gitconfig`.
 
-### 2. Install Vim Plugins
+### 3. Install Vim Plugins
 
 Open vim and run:
 
@@ -114,7 +132,7 @@ Open vim and run:
 
 This will install all the plugins defined in `.vimrc`.
 
-### 3. Restart Your Terminal
+### 4. Restart Your Terminal
 
 Restart your terminal or run:
 
@@ -122,7 +140,7 @@ Restart your terminal or run:
 source ~/.zshrc
 ```
 
-### 4. Optional Customizations
+### 5. Optional Customizations
 
 Create a `~/.zshrc.local` file for machine-specific settings that won't be tracked in git:
 
