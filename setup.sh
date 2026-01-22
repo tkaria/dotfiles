@@ -209,7 +209,7 @@ install_nerdfonts_linux() {
 
 # Install oh-my-zsh
 install_oh_my_zsh() {
-    if [ -d "$HOME/.oh-my-zsh" ]; then
+    if [ -f "$HOME/.oh-my-zsh/oh-my-zsh.sh" ]; then
         print_success "oh-my-zsh already installed"
         return
     fi
