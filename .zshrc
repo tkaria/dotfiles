@@ -81,7 +81,12 @@ plugins=(
   history-substring-search
 )
 
-source $ZSH/oh-my-zsh.sh
+# Source oh-my-zsh if it's installed
+if [ -f "$ZSH/oh-my-zsh.sh" ]; then
+  source $ZSH/oh-my-zsh.sh
+else
+  echo "oh-my-zsh not found. Run the setup.sh script to install it."
+fi
 
 # User configuration
 
