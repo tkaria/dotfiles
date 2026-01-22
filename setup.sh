@@ -119,8 +119,14 @@ install_macos_deps() {
 
     # Install NerdFonts
     print_info "Installing BlexMono Nerd Font..."
-    brew install --cask font-blex-mono-nerd-font
-    print_success "BlexMono Nerd Font installed"
+    if brew list --cask font-blex-mono-nerd-font &> /dev/null || \
+       [ -f "$HOME/Library/Fonts/BlexMonoNerdFont-Regular.ttf" ] || \
+       [ -f "/Library/Fonts/BlexMonoNerdFont-Regular.ttf" ]; then
+        print_success "BlexMono Nerd Font already installed"
+    else
+        brew install --cask font-blex-mono-nerd-font
+        print_success "BlexMono Nerd Font installed"
+    fi
 
     # Configure macOS settings
     print_info "Configuring macOS settings..."
