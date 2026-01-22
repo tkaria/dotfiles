@@ -118,8 +118,7 @@ install_macos_deps() {
     brew install git vim zsh fzf ripgrep
 
     # Install NerdFonts
-    print_info "Installing NerdFonts..."
-    brew tap homebrew/cask-fonts
+    print_info "Installing BlexMono Nerd Font..."
     brew install --cask font-blex-mono-nerd-font
     print_success "BlexMono Nerd Font installed"
 
