@@ -1,0 +1,54 @@
+# Ghostty Terminal Configuration
+# https://ghostty.org/docs
+
+# Font Configuration
+font-family = BlexMono Nerd Font
+font-size = 14
+
+# Enable font features for better rendering
+font-feature = -calt
+
+# Window Settings
+window-padding-x = 8
+window-padding-y = 8
+window-theme = auto
+
+# Cursor
+cursor-style = block
+cursor-style-blink = false
+
+# Shell
+shell-integration = zsh
+shell-integration-features = cursor,sudo,title
+
+# Theme/Colors
+# Ghostty will respect your terminal colors from vim color schemes
+# Uncomment one of these if you want a specific theme:
+# theme = GruvboxDark
+# theme = Solarized Dark
+
+# Background
+background-opacity = 1.0
+
+# Scrollback
+scrollback-limit = 10000
+
+# Copy/Paste behavior
+copy-on-select = false
+clipboard-read = allow
+clipboard-write = allow
+
+# Mouse
+mouse-hide-while-typing = true
+
+# Keybindings
+# Ghostty uses standard macOS/Linux keybindings by default
+# Uncomment to customize:
+# keybind = super+t=new_tab
+# keybind = super+w=close_tab
+# keybind = super+shift+left=goto_tab:-1
+# keybind = super+shift+right=goto_tab:+1
+
+# Performance
+# Ghostty is very fast by default, these are optional tweaks
+resize-overlay = never

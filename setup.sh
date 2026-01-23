@@ -70,6 +70,14 @@ backup_dotfiles() {
         fi
     done
 
+    # Backup Ghostty config if it exists
+    if [ -f "$HOME/.config/ghostty/config" ] || [ -L "$HOME/.config/ghostty/config" ]; then
+        mkdir -p "$BACKUP_DIR/.config/ghostty"
+        mv "$HOME/.config/ghostty/config" "$BACKUP_DIR/.config/ghostty/"
+        print_success "Backed up .config/ghostty/config"
+        backed_up=$((backed_up + 1))
+    fi
+
     if [ $backed_up -eq 0 ]; then
         print_warning "No existing dotfiles found to backup"
         rmdir "$BACKUP_DIR"
@@ -92,6 +100,13 @@ create_symlinks() {
             print_warning "$file not found in $DOTFILES_DIR"
         fi
     done
+
+    # Create Ghostty config symlink
+    if [ -f "$DOTFILES_DIR/ghostty" ]; then
+        mkdir -p "$HOME/.config/ghostty"
+        ln -sf "$DOTFILES_DIR/ghostty" "$HOME/.config/ghostty/config"
+        print_success "Linked .config/ghostty/config"
+    fi
 }
 
 # Install dependencies for macOS
