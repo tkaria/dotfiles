@@ -143,6 +143,15 @@ install_macos_deps() {
         print_success "BlexMono Nerd Font installed"
     fi
 
+    # Install Ghostty terminal
+    print_info "Installing Ghostty terminal..."
+    if brew list --cask ghostty &> /dev/null || [ -d "/Applications/Ghostty.app" ]; then
+        print_success "Ghostty already installed"
+    else
+        brew install --cask ghostty
+        print_success "Ghostty installed"
+    fi
+
     # Configure macOS settings
     print_info "Configuring macOS settings..."
 

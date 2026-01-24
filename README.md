@@ -57,6 +57,7 @@ My personal dotfiles for vim, git, and zsh. Works on both macOS and Linux.
 - Creates symlinks to dotfiles
 - Installs required tools and dependencies
 - Installs BlexMono Nerd Font
+- Installs Ghostty terminal (macOS)
 - Sets up oh-my-zsh and plugins
 - Installs vim-plug
 - Sets zsh as default shell
@@ -80,9 +81,10 @@ The setup script will:
 3. Create symlinks from your home directory to this repository
 4. Install necessary tools (Homebrew on macOS, apt/yum/pacman on Linux)
 5. Install BlexMono Nerd Font
-6. Install oh-my-zsh and plugins
-7. Install vim-plug
-8. Set zsh as your default shell
+6. Install Ghostty terminal (macOS only)
+7. Install oh-my-zsh and plugins
+8. Install vim-plug
+9. Set zsh as your default shell
 
 ### Manual Installation
 
