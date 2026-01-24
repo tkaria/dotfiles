@@ -70,6 +70,14 @@ backup_dotfiles() {
         fi
     done
 
+    # Backup Ghostty config if it exists
+    if [ -f "$HOME/.config/ghostty/config" ] || [ -L "$HOME/.config/ghostty/config" ]; then
+        mkdir -p "$BACKUP_DIR/.config/ghostty"
+        mv "$HOME/.config/ghostty/config" "$BACKUP_DIR/.config/ghostty/"
+        print_success "Backed up .config/ghostty/config"
+        backed_up=$((backed_up + 1))
+    fi
+
     if [ $backed_up -eq 0 ]; then
         print_warning "No existing dotfiles found to backup"
         rmdir "$BACKUP_DIR"
@@ -92,6 +100,13 @@ create_symlinks() {
             print_warning "$file not found in $DOTFILES_DIR"
         fi
     done
+
+    # Create Ghostty config symlink
+    if [ -f "$DOTFILES_DIR/ghostty" ]; then
+        mkdir -p "$HOME/.config/ghostty"
+        ln -sf "$DOTFILES_DIR/ghostty" "$HOME/.config/ghostty/config"
+        print_success "Linked .config/ghostty/config"
+    fi
 }
 
 # Install dependencies for macOS
@@ -126,6 +141,15 @@ install_macos_deps() {
     else
         brew install --cask font-blex-mono-nerd-font
         print_success "BlexMono Nerd Font installed"
+    fi
+
+    # Install Ghostty terminal
+    print_info "Installing Ghostty terminal..."
+    if brew list --cask ghostty &> /dev/null || [ -d "/Applications/Ghostty.app" ]; then
+        print_success "Ghostty already installed"
+    else
+        brew install --cask ghostty
+        print_success "Ghostty installed"
     fi
 
     # Configure macOS settings

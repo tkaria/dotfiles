@@ -44,12 +44,20 @@ My personal dotfiles for vim, git, and zsh. Works on both macOS and Linux.
 - Enables powerline symbols in vim-airline
 - Provides icon glyphs for enhanced terminal experience
 
+### Ghostty Terminal Configuration (ghostty)
+- Modern terminal emulator configuration
+- Pre-configured with BlexMono Nerd Font
+- Shell integration for zsh
+- Sensible defaults for performance and appearance
+- Automatically symlinked to `~/.config/ghostty/config`
+
 ### Setup Script (setup.sh)
 - Automatic OS detection (macOS/Linux)
 - Backs up existing dotfiles with timestamp
 - Creates symlinks to dotfiles
 - Installs required tools and dependencies
 - Installs BlexMono Nerd Font
+- Installs Ghostty terminal (macOS)
 - Sets up oh-my-zsh and plugins
 - Installs vim-plug
 - Sets zsh as default shell
@@ -73,9 +81,10 @@ The setup script will:
 3. Create symlinks from your home directory to this repository
 4. Install necessary tools (Homebrew on macOS, apt/yum/pacman on Linux)
 5. Install BlexMono Nerd Font
-6. Install oh-my-zsh and plugins
-7. Install vim-plug
-8. Set zsh as your default shell
+6. Install Ghostty terminal (macOS only)
+7. Install oh-my-zsh and plugins
+8. Install vim-plug
+9. Set zsh as your default shell
 
 ### Manual Installation
 
@@ -105,6 +114,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 Set your terminal to use **BlexMono Nerd Font** for the best experience:
 
+- **Ghostty**: Already configured in the dotfiles (font is set automatically)
 - **iTerm2** (macOS): Preferences → Profiles → Text → Font → Select "BlexMono Nerd Font"
 - **Terminal.app** (macOS): Preferences → Profiles → Font → Change → Select "BlexMono Nerd Font"
 - **GNOME Terminal** (Linux): Preferences → Profile → Custom font → Select "BlexMono Nerd Font"
@@ -220,6 +230,7 @@ dotfiles/
 ├── .gitconfig       # Git configuration
 ├── .vimrc          # Vim configuration
 ├── .zshrc          # Zsh configuration
+├── ghostty         # Ghostty terminal configuration
 ├── setup.sh        # Setup script
 └── README.md       # This file
 ```
