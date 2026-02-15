@@ -51,8 +51,6 @@ keybind = super+shift+right=goto_tab:next
 # keybind = super+w=close_tab
 # keybind = cmd+shift+left_arrow=goto_tab:-1
 # keybind = cmd+shift+right=goto_tab:+1
-keybind = cmd+option+left=previous_tab
-keybind = cmd+option+right=next_tab
 
 # Performance
 # Ghostty is very fast by default, these are optional tweaks
