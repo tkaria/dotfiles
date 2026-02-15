@@ -61,4 +61,3 @@ font-family = BlexMono Nerd Font Mono
 font-size = 14
 keybind = super+option+arrow_left=previous_tab
 keybind = super+option+arrow_right=next_tab
-
