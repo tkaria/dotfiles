@@ -42,15 +42,17 @@ clipboard-write = allow
 mouse-hide-while-typing = true
 
 # Keybindings
-# Ghostty uses standard macOS/Linux keybindings by default
-# Uncomment to customize:
+# Tab navigation
+keybind = super+shift+left=goto_tab:previous
+keybind = super+shift+right=goto_tab:next
+
+# Other keybindings (uncomment to customize):
 # keybind = super+t=new_tab
 # keybind = super+w=close_tab
 # keybind = cmd+shift+left_arrow=goto_tab:-1
 # keybind = cmd+shift+right=goto_tab:+1
 keybind = cmd+option+left=previous_tab
 keybind = cmd+option+right=next_tab
-
 
 # Performance
 # Ghostty is very fast by default, these are optional tweaks
