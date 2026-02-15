@@ -275,14 +275,6 @@ install_zsh_plugins() {
     else
         print_success "fast-syntax-highlighting already installed"
     fi
-
-    # zsh-autocomplete
-    if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autocomplete" ]; then
-        git clone --depth 1 https://github.com/marlonrichert/zsh-autocomplete.git "$ZSH_CUSTOM/plugins/zsh-autocomplete"
-        print_success "Installed zsh-autocomplete"
-    else
-        print_success "zsh-autocomplete already installed"
-    fi
 }
 
 # Install vim-plug

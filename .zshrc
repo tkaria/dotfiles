@@ -75,7 +75,6 @@ plugins=(
   zsh-autosuggestions
   zsh-syntax-highlighting
   fast-syntax-highlighting
-  zsh-autocomplete
   docker
   kubectl
   history-substring-search
