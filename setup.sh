@@ -130,7 +130,7 @@ install_macos_deps() {
 
     # Install essential tools
     print_info "Installing essential tools via Homebrew..."
-    brew install git vim zsh fzf ripgrep
+    brew install git vim zsh fzf ripgrep tmux
 
     # Install NerdFonts
     print_info "Installing BlexMono Nerd Font..."
@@ -169,7 +169,7 @@ install_linux_deps() {
     if command -v apt-get &> /dev/null; then
         print_info "Using apt package manager..."
         sudo apt-get update
-        sudo apt-get install -y git vim zsh curl wget
+        sudo apt-get install -y git vim zsh curl wget tmux
 
         # Install fzf
         if [ ! -d "$HOME/.fzf" ]; then
@@ -179,11 +179,11 @@ install_linux_deps() {
 
     elif command -v yum &> /dev/null; then
         print_info "Using yum package manager..."
-        sudo yum install -y git vim zsh curl wget
+        sudo yum install -y git vim zsh curl wget tmux
 
     elif command -v pacman &> /dev/null; then
         print_info "Using pacman package manager..."
-        sudo pacman -Sy --noconfirm git vim zsh curl wget fzf
+        sudo pacman -Sy --noconfirm git vim zsh curl wget fzf tmux
 
     else
         print_warning "Unknown package manager. Please install git, vim, zsh, curl, wget manually."
