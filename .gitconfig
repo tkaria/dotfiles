@@ -3,8 +3,6 @@
 	name = Timir
 	# Set your git user name and email
 	# Uncomment and fill in your details:
-	name = Timir
-	email = tkaria@gmail.com
 
 [core]
 	editor = vim
