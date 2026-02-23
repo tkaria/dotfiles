@@ -59,7 +59,7 @@ backup_dotfiles() {
 
     mkdir -p "$BACKUP_DIR"
 
-    local files=(".vimrc" ".zshrc" ".gitconfig")
+    local files=(".vimrc" ".zshrc" ".gitconfig" ".tmux.conf")
     local backed_up=0
 
     for file in "${files[@]}"; do
@@ -90,7 +90,7 @@ backup_dotfiles() {
 create_symlinks() {
     print_info "Creating symlinks..."
 
-    local files=(".vimrc" ".zshrc" ".gitconfig")
+    local files=(".vimrc" ".zshrc" ".gitconfig" ".tmux.conf")
 
     for file in "${files[@]}"; do
         if [ -f "$DOTFILES_DIR/$file" ]; then
