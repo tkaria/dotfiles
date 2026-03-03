@@ -102,6 +102,8 @@ set showmode
 set showcmd
 
 " Searching
+nnoremap / /\v
+vnoremap / /\v
 set hlsearch
 set incsearch
 set ignorecase
