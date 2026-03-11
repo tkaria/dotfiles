@@ -130,7 +130,7 @@ install_macos_deps() {
 
     # Install essential tools
     print_info "Installing essential tools via Homebrew..."
-    brew install git vim zsh fzf ripgrep tmux
+    brew install git vim zsh fzf ripgrep tmux glow
 
     # Install NerdFonts
     print_info "Installing BlexMono Nerd Font..."
