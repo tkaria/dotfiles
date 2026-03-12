@@ -225,3 +225,8 @@ if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
 alias pb="pbcopy <"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/timir/.lmstudio/bin"
+# End of LM Studio CLI section
+
