@@ -26,6 +26,7 @@ shell-integration-features = cursor,sudo,title
 # Uncomment one of these if you want a specific theme:
 # theme = GruvboxDark
 # theme = Solarized Dark
+theme = Catppuccin Frappe
 
 # Background
 background-opacity = 1.0
