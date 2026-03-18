@@ -219,6 +219,12 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
   fi
 fi
 
+# ===== Terminal Title =====
+# Automatically set terminal window/tab title to show user@host: directory
+precmd() {
+  echo -ne "\033]0;${USER}@${HOST}: ${PWD/#$HOME/~}\007"
+}
+
 # ===== Load local customizations =====
 # Create ~/.zshrc.local for machine-specific settings
 if [[ -f ~/.zshrc.local ]]; then
