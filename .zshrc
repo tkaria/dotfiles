@@ -224,3 +224,4 @@ fi
 if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
+export PATH="$HOME/.npm-global/bin:$PATH"
