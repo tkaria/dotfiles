@@ -38,6 +38,15 @@ My personal dotfiles for vim, git, and zsh. Works on both macOS and Linux.
 - URL shortcuts (gh:, gist:)
 - Auto-correct for mistyped commands
 
+### Tmux Configuration (.tmux.conf)
+- Better prefix key (Ctrl+a instead of Ctrl+b)
+- Mouse support enabled
+- Vim-style pane navigation (h, j, k, l)
+- Intuitive window splitting (| and -)
+- Enhanced status bar with colors
+- 50,000 line scrollback buffer
+- Copy mode with vim keybindings
+
 ### Fonts
 - **BlexMono Nerd Font** (IBM Plex Mono patched with icons)
 - Installed automatically on both macOS and Linux
@@ -228,6 +237,7 @@ Add aliases to the `[alias]` section in `.gitconfig`:
 ```
 dotfiles/
 ├── .gitconfig       # Git configuration
+├── .tmux.conf      # Tmux configuration
 ├── .vimrc          # Vim configuration
 ├── .zshrc          # Zsh configuration
 ├── ghostty         # Ghostty terminal configuration

@@ -1,8 +1,8 @@
 [user]
+	email = tkaria@gmail.com
+	name = Timir
 	# Set your git user name and email
 	# Uncomment and fill in your details:
-	name = Timir
-	email = tkaria@gmail.com
 
 [core]
 	editor = vim
@@ -134,3 +134,9 @@
 	insteadOf = "gist:"
 [credential]
 	helper = osxkeychain
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
