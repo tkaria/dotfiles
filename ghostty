@@ -43,8 +43,8 @@ mouse-hide-while-typing = true
 
 # Keybindings
 # Tab navigation
-keybind = super+shift+left=goto_tab:previous
-keybind = super+shift+right=goto_tab:next
+#keybind = super+shift+left=goto_tab:previous
+#keybind = super+shift+right=goto_tab:next
 
 # Other keybindings (uncomment to customize):
 # keybind = super+t=new_tab
