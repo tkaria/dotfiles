@@ -1,6 +1,7 @@
 [user]
-	email = tkaria@gmail.com
+	email = timir.karia@docker.com
 	name = Timir
+	signingkey = /Users/timir/.ssh/id_ed25519
 	# Set your git user name and email
 	# Uncomment and fill in your details:
 
@@ -140,3 +141,7 @@
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/opt/homebrew/bin/gh auth git-credential
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
