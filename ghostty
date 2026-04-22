@@ -26,6 +26,7 @@ shell-integration-features = cursor,sudo,title
 # Uncomment one of these if you want a specific theme:
 # theme = GruvboxDark
 # theme = Solarized Dark
+theme = Catppuccin Frappe
 
 # Background
 background-opacity = 1.0
@@ -43,8 +44,8 @@ mouse-hide-while-typing = true
 
 # Keybindings
 # Tab navigation
-#keybind = super+shift+left=goto_tab:previous
-#keybind = super+shift+right=goto_tab:next
+keybind = super+shift+left=goto_tab:previous
+keybind = super+shift+right=goto_tab:next
 
 # Other keybindings (uncomment to customize):
 # keybind = super+t=new_tab
@@ -59,6 +60,9 @@ resize-overlay = never
 # Customization
 font-family = BlexMono Nerd Font Mono
 font-size = 14
+# Keybindings
+# Tab navigation
 keybind = super+option+arrow_left=previous_tab
 keybind = super+option+arrow_right=next_tab
+# Soft newline
 keybind = shift+enter=text:\x1b\r

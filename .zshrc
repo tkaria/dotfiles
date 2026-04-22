@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/$HOME/.local/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -8,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="agnoster"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -226,3 +226,11 @@ if [[ -f ~/.zshrc.local ]]; then
 fi
 export PATH="$HOME/.npm-global/bin:$PATH"
 alias pb="pbcopy <"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/timir/.lmstudio/bin"
+# End of LM Studio CLI section
+
+
+# wsp shell integration
+eval "$(wsp completion zsh)"
