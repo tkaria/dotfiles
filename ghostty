@@ -43,15 +43,14 @@ clipboard-write = allow
 mouse-hide-while-typing = true
 
 # Keybindings
-# Tab navigation
-keybind = super+shift+left=goto_tab:previous
-keybind = super+shift+right=goto_tab:next
-
-# Other keybindings (uncomment to customize):
 # keybind = super+t=new_tab
 # keybind = super+w=close_tab
-# keybind = cmd+shift+left_arrow=goto_tab:-1
-# keybind = cmd+shift+right=goto_tab:+1
+
+# Tab navigation
+keybind = super+option+arrow_left=previous_tab
+keybind = super+option+arrow_right=next_tab
+# Soft newline
+keybind = shift+enter=text:\x1b\r
 
 # Performance
 # Ghostty is very fast by default, these are optional tweaks
@@ -60,9 +59,3 @@ resize-overlay = never
 # Customization
 font-family = BlexMono Nerd Font Mono
 font-size = 14
-# Keybindings
-# Tab navigation
-keybind = super+option+arrow_left=previous_tab
-keybind = super+option+arrow_right=next_tab
-# Soft newline
-keybind = shift+enter=text:\x1b\r
