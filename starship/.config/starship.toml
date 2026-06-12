@@ -1,0 +1,9 @@
+# Starship prompt configuration
+# Full agnoster-style config will be added in Phase 4 (shell modernization)
+# See: https://starship.rs/config/
+
+"$schema" = 'https://starship.rs/config-schema.json'
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"

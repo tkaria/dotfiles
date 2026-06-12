@@ -1,0 +1,15 @@
+git
+neovim
+zsh
+tmux
+fzf
+ripgrep
+fd-find
+bat
+zoxide
+stow
+gh
+jq
+curl
+unzip
+build-essential
