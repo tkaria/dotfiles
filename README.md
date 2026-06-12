@@ -1,6 +1,6 @@
 # Dotfiles
 
-Personal dotfiles for zsh, neovim, tmux, git, and ghostty — managed with [GNU stow](https://www.gnu.org/software/stow/) and organized around the [XDG Base Directory spec](https://specification.freedesktop.org/basedir-spec/basedir-spec-latest.html).
+Personal dotfiles for zsh, neovim, tmux, git, and ghostty — managed with [GNU stow](https://www.gnu.org/software/stow/) and organized around the [XDG Base Directory spec](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html).
 
 ## Stack
 
