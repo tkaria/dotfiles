@@ -29,10 +29,11 @@ return {
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
+      "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
       local lspconfig = require("lspconfig")
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       -- on_attach: keymaps active only when LSP attaches
       local on_attach = function(_, bufnr)
