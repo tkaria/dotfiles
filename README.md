@@ -132,14 +132,14 @@ Set your terminal to use **BlexMono Nerd Font** for the best experience:
 
 ### 2. Configure Git User Information
 
-Edit `.gitconfig` and add your name and email:
+Copy the example config and fill in your details:
 
 ```bash
-git config --global user.name "Your Name"
-git config --global user.email "your.email@example.com"
+cp git/config.local.example ~/.config/git/config.local
+vim ~/.config/git/config.local
 ```
 
-Or uncomment and edit the user section in `~/.gitconfig`.
+Set your name, email, and signing key in `~/.config/git/config.local`. This file is gitignored and will never be committed.
 
 ### 3. Install Vim Plugins
 
@@ -237,10 +237,13 @@ Add aliases to the `[alias]` section in `.gitconfig`:
 ```
 dotfiles/
 ├── .gitconfig       # Git configuration
+├── .gitignore       # Gitignore rules
 ├── .tmux.conf      # Tmux configuration
 ├── .vimrc          # Vim configuration
 ├── .zshrc          # Zsh configuration
 ├── ghostty         # Ghostty terminal configuration
+├── git/
+│   └── config.local.example  # Template for ~/.config/git/config.local
 ├── setup.sh        # Setup script
 └── README.md       # This file
 ```

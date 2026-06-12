@@ -1,1 +1,26 @@
-./.env
+# Secrets / local overrides
+.env
+.env.*
+*.local
+.zshrc.local
+**/config.local
+
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor cruft
+*.swp
+*.swo
+*~
+.vim/.netrwhist
+.vim/plugged/
+.vim/autoload/plug.vim
+.config/nvim/lazy-lock.json
+.config/nvim/.luarc.json
+
+# Plugin manager state
+**/plugged/
+**/lazy/
+**/zinit/

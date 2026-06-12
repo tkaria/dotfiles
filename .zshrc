@@ -219,18 +219,15 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
   fi
 fi
 
+# ===== Machine-specific settings =====
+# Add the following to ~/.zshrc.local (gitignored):
+#   export PATH="$HOME/.npm-global/bin:$PATH"
+#   export PATH="$PATH:$HOME/.lmstudio/bin"
+#   eval "$(wsp completion zsh)"
+#   alias pb="pbcopy <"
+
 # ===== Load local customizations =====
 # Create ~/.zshrc.local for machine-specific settings
 if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
-export PATH="$HOME/.npm-global/bin:$PATH"
-alias pb="pbcopy <"
-
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/timir/.lmstudio/bin"
-# End of LM Studio CLI section
-
-
-# wsp shell integration
-eval "$(wsp completion zsh)"
