@@ -84,7 +84,7 @@ plugins=(
 if [ -f "$ZSH/oh-my-zsh.sh" ]; then
   source $ZSH/oh-my-zsh.sh
 else
-  echo "oh-my-zsh not found. Run the setup.sh script to install it."
+  echo "oh-my-zsh not found. Run ./bootstrap.sh to install, or see Phase 4 for Zinit migration."
 fi
 
 # User configuration
