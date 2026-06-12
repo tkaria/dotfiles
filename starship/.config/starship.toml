@@ -1,9 +1,116 @@
-# Starship prompt configuration
-# Full agnoster-style config will be added in Phase 4 (shell modernization)
-# See: https://starship.rs/config/
+# Starship prompt — agnoster-inspired, Catppuccin Frappé palette
+# https://starship.rs/config/
 
 "$schema" = 'https://starship.rs/config-schema.json'
 
+# Insert blank line before each prompt
+add_newline = false
+
+# Overall format — left prompt segments
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_status\
+$kubernetes\
+$cmd_duration\
+$line_break\
+$character"""
+
+# ── Username ──────────────────────────────────────────────────────────────────
+[username]
+style_user = "bg:#626880 fg:#c6d0f5 bold"
+style_root = "bg:#e78284 fg:#232634 bold"
+format = '[ $user ]($style)'
+show_always = true
+disabled = false
+
+# ── Hostname ──────────────────────────────────────────────────────────────────
+[hostname]
+ssh_only = false
+format = '[$hostname](bg:#51576d fg:#c6d0f5)[ ](bg:#414559 fg:#51576d)'
+disabled = false
+
+# ── Directory ─────────────────────────────────────────────────────────────────
+[directory]
+style = "bg:#414559 fg:#c6d0f5 bold"
+format = "[ $path ]($style)[$read_only]($read_only_style)"
+truncation_length = 4
+truncate_to_repo = true
+read_only = " 󰌾"
+read_only_style = "bg:#414559 fg:#e78284"
+
+[directory.substitutions]
+"~/dev" = "󰲋 dev"
+"~" = " ~"
+
+# ── Git ───────────────────────────────────────────────────────────────────────
+[git_branch]
+symbol = " "
+style = "bg:#303446 fg:#ca9ee6 bold"
+format = '[ $symbol$branch(:$remote_branch) ]($style)'
+
+[git_status]
+style = "bg:#303446 fg:#e78284"
+format = '([$all_status$ahead_behind]($style) )'
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+conflicted = "✖${count}"
+deleted = "✘${count}"
+renamed = "»${count}"
+modified = "!${count}"
+staged = "+${count}"
+untracked = "?${count}"
+
+# ── Kubernetes ────────────────────────────────────────────────────────────────
+[kubernetes]
+format = '[$symbol$context(\($namespace\))]($style) '
+style = "fg:#ef9f76 bold"
+symbol = "☸ "
+disabled = false
+
+# ── Command duration ──────────────────────────────────────────────────────────
+[cmd_duration]
+min_time = 2_000
+format = "[ 󱦟 $duration]($style) "
+style = "fg:#e5c890"
+
+# ── Prompt character ──────────────────────────────────────────────────────────
 [character]
-success_symbol = "[❯](bold green)"
-error_symbol = "[❯](bold red)"
+success_symbol = "[❯](bold fg:#a6d189)"
+error_symbol = "[❯](bold fg:#e78284)"
+vicmd_symbol = "[❮](bold fg:#ca9ee6)"
+
+# ── Tools (shown only when in-use) ────────────────────────────────────────────
+[nodejs]
+symbol = " "
+style = "fg:#a6d189"
+format = "[$symbol($version )]($style)"
+
+[python]
+symbol = " "
+style = "fg:#e5c890"
+format = "[$symbol($version )(\($virtualenv\) )]($style)"
+
+[rust]
+symbol = " "
+style = "fg:#ef9f76"
+format = "[$symbol($version )]($style)"
+
+[golang]
+symbol = " "
+style = "fg:#89dceb"
+format = "[$symbol($version )]($style)"
+
+[docker_context]
+symbol = " "
+style = "fg:#89b4fa"
+format = "[$symbol$context ]($style)"
+
+[package]
+symbol = "󰏗 "
+style = "fg:#f4b8e4"
+format = "[$symbol$version ]($style)"
+disabled = true
