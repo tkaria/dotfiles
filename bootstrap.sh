@@ -57,7 +57,9 @@ install_packages() {
       ;;
     linux)
       run sudo apt-get update -qq
-      run xargs -a "$DOTFILES_DIR/packages/apt.txt" sudo apt-get install -y
+      local pkgs
+      pkgs=$(grep -v '^\s*#' "$DOTFILES_DIR/packages/apt.txt" | grep -v '^\s*$')
+      run sudo apt-get install -y $pkgs
       # delta + starship + eza need manual install on older Ubuntu
       if ! command -v delta &>/dev/null; then
         DELTA_VER="0.17.0"
