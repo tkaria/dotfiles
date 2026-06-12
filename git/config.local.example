@@ -2,28 +2,28 @@
 # Put machine-specific / personal git settings here.
 
 [user]
-    name = Your Name
-    email = you@example.com
-    signingkey = ~/.ssh/id_ed25519
+	name = Your Name
+	email = you@example.com
+	signingkey = ~/.ssh/id_ed25519
 
 [gpg]
-    format = ssh
+	format = ssh
 
 [commit]
-    gpgsign = true
+	gpgsign = true
 
 # Credential helpers (macOS example):
 # [credential]
-#     helper = osxkeychain
+# 	helper = osxkeychain
 # [credential "https://github.com"]
-#     helper =
-#     helper = !/opt/homebrew/bin/gh auth git-credential
+# 	helper =
+# 	helper = !/opt/homebrew/bin/gh auth git-credential
 # [credential "https://gist.github.com"]
-#     helper =
-#     helper = !/opt/homebrew/bin/gh auth git-credential
+# 	helper =
+# 	helper = !/opt/homebrew/bin/gh auth git-credential
 
 # Conditional includes (optional):
 # [includeIf "gitdir:~/dev/work/"]
-#     path = ~/.config/git/config.work
+# 	path = ~/.config/git/config.work
 # [includeIf "gitdir:~/dev/personal/"]
-#     path = ~/.config/git/config.personal
+# 	path = ~/.config/git/config.personal

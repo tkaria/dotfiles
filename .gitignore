@@ -3,7 +3,6 @@
 .env.*
 *.local
 .zshrc.local
-config.local
 **/config.local
 
 # OS cruft
