@@ -18,7 +18,7 @@
 	navigate = true
 	line-numbers = true
 	side-by-side = false
-	syntax-theme = Catppuccin-Frappe
+	syntax-theme = Catppuccin Frappe
 
 # Uncomment to use delta as git pager (install via: brew install git-delta)
 # [core]
@@ -65,7 +65,7 @@
 	# Include summaries of merged commits in newly created merge commit messages
 	log = true
 	# Show common ancestor code in conflict hunks
-	conflictstyle = diff3
+	conflictstyle = zdiff3
 
 [rebase]
 	autoStash = true
