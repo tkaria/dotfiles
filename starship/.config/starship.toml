@@ -101,12 +101,12 @@ format = "[$symbol($version )]($style)"
 
 [golang]
 symbol = " "
-style = "fg:#89dceb"
+style = "fg:#99d1db"
 format = "[$symbol($version )]($style)"
 
 [docker_context]
 symbol = " "
-style = "fg:#89b4fa"
+style = "fg:#8caaee"
 format = "[$symbol$context ]($style)"
 
 [package]

@@ -13,7 +13,6 @@ autoload -Uz _zinit
 
 # ===== Options =====
 setopt EXTENDED_HISTORY          # Write history in ':start:elapsed;command' format
-setopt INC_APPEND_HISTORY        # Write to history file immediately
 setopt SHARE_HISTORY             # Share history across sessions
 setopt HIST_IGNORE_DUPS          # Don't record duplicate of last entry
 setopt HIST_IGNORE_ALL_DUPS      # Delete old entry if new one is a duplicate
@@ -117,19 +116,20 @@ zinit wait lucid for \
   blockf atpull'zinit creinstall -q .' \
     zsh-users/zsh-completions
 
-zinit wait lucid for \
-    zsh-users/zsh-history-substring-search
-
 # Bind history substring search to Up/Down arrows (after plugin loads)
 zinit wait lucid atload"
   bindkey '\e[A' history-substring-search-up
   bindkey '\e[B' history-substring-search-down
-" for zsh-users/zsh-history-substring-search 2>/dev/null || true
+" for zsh-users/zsh-history-substring-search
 
 # ===== Tool integrations =====
 
-# fzf
-[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
+# fzf (prefer modern --zsh flag for fzf >= 0.48; fall back to legacy file)
+if command -v fzf &>/dev/null; then
+  eval "$(fzf --zsh)"
+elif [[ -f ~/.fzf.zsh ]]; then
+  source ~/.fzf.zsh
+fi
 
 # zoxide (modern cd replacement)
 if command -v zoxide &>/dev/null; then
