@@ -1,10 +1,3 @@
-[user]
-	email = timir.karia@docker.com
-	name = Timir
-	signingkey = /Users/timir/.ssh/id_ed25519
-	# Set your git user name and email
-	# Uncomment and fill in your details:
-
 [core]
 	editor = vim
 	# Treat spaces before tabs and all kinds of trailing whitespace as an error
@@ -133,15 +126,6 @@
 
 [url "git://gist.github.com/"]
 	insteadOf = "gist:"
-[credential]
-	helper = osxkeychain
-[credential "https://github.com"]
-	helper = 
-	helper = !/opt/homebrew/bin/gh auth git-credential
-[credential "https://gist.github.com"]
-	helper = 
-	helper = !/opt/homebrew/bin/gh auth git-credential
-[gpg]
-	format = ssh
-[commit]
-	gpgsign = true
+
+[include]
+    path = ~/.config/git/config.local

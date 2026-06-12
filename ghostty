@@ -52,10 +52,9 @@ keybind = super+option+arrow_right=next_tab
 # Soft newline
 keybind = shift+enter=text:\x1b\r
 
+macos-titlebar-style = tabs
+confirm-close-surface = false
+
 # Performance
 # Ghostty is very fast by default, these are optional tweaks
 resize-overlay = never
-
-# Customization
-font-family = BlexMono Nerd Font Mono
-font-size = 14

@@ -1,0 +1,29 @@
+# ~/.config/git/config.local  (gitignored — copy this file to that path)
+# Put machine-specific / personal git settings here.
+
+[user]
+    name = Your Name
+    email = you@example.com
+    signingkey = ~/.ssh/id_ed25519
+
+[gpg]
+    format = ssh
+
+[commit]
+    gpgsign = true
+
+# Credential helpers (macOS example):
+# [credential]
+#     helper = osxkeychain
+# [credential "https://github.com"]
+#     helper =
+#     helper = !/opt/homebrew/bin/gh auth git-credential
+# [credential "https://gist.github.com"]
+#     helper =
+#     helper = !/opt/homebrew/bin/gh auth git-credential
+
+# Conditional includes (optional):
+# [includeIf "gitdir:~/dev/work/"]
+#     path = ~/.config/git/config.work
+# [includeIf "gitdir:~/dev/personal/"]
+#     path = ~/.config/git/config.personal
