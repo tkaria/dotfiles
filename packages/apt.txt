@@ -13,3 +13,9 @@ jq
 curl
 unzip
 build-essential
+
+# Note: eza, btop, and glow are not available in standard Ubuntu apt repos.
+# Install manually or via snap/cargo:
+#   cargo install eza
+#   snap install btop
+#   snap install glow

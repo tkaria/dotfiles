@@ -85,6 +85,10 @@ install_stow() {
 
 stow_packages() {
   blue "Stowing packages: ${PACKAGES[*]}"
+
+  # Ensure nvim config dir exists (placeholder until Phase 5)
+  run mkdir -p "${XDG_CONFIG_HOME:-$HOME/.config}/nvim"
+
   for pkg in "${PACKAGES[@]}"; do
     if [[ -d "$DOTFILES_DIR/$pkg" ]]; then
       run stow --restow --target="$HOME" --dir="$DOTFILES_DIR" "$pkg"
@@ -146,7 +150,7 @@ post_install_notes() {
   echo ""
   blue "Post-install checklist:"
   echo "  1. Copy git/config.local.example  →  ~/.config/git/config.local  and fill in your details"
-  echo "  2. Copy zsh/zshrc.local.example   →  ~/.zshrc.local              for machine-specific settings"
+  echo "  2. Copy zsh/.config/zsh/zshrc.local.example  →  ~/.zshrc.local   for machine-specific settings"
   echo "  3. Start tmux and press prefix+I to install tmux plugins"
   echo "  4. Open Neovim — lazy.nvim will auto-install plugins on first launch"
   echo "  5. Set your terminal font to: BlexMono Nerd Font"
