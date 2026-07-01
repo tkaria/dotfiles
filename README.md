@@ -2,15 +2,22 @@
 
 Personal dotfiles for zsh, neovim, tmux, git, and ghostty — managed with [GNU stow](https://www.gnu.org/software/stow/) and organized around the [XDG Base Directory spec](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html).
 
-## Features
+## Stack
 
-- **Zsh** — oh-my-zsh today, migrating to Zinit + Starship (phase 4)
-- **Neovim** — lazy.nvim config (phase 5)
-- **Tmux** — TPM + catppuccin + resurrect/continuum
-- **Git** — delta pager, rerere, modern defaults, identity kept out of the repo
-- **Ghostty** — Catppuccin Frappé theme, BlexMono Nerd Font
+| Tool | Choice | Notes |
+|------|--------|-------|
+| Shell | zsh + [Zinit](https://github.com/zdharma-continuum/zinit) | Turbo async plugin loading |
+| Prompt | [Starship](https://starship.rs) | Agnoster-style, Catppuccin Frappé |
+| Editor | [Neovim](https://neovim.io) + [lazy.nvim](https://github.com/folke/lazy.nvim) | LSP, treesitter, telescope |
+| Multiplexer | [tmux](https://github.com/tmux/tmux) + [TPM](https://github.com/tmux-plugins/tpm) | Resurrect + continuum |
+| Git pager | [delta](https://github.com/dandavison/delta) | Catppuccin Frappé syntax theme |
+| Terminal | [Ghostty](https://ghostty.org) | Catppuccin Frappé theme |
+| Font | BlexMono Nerd Font | Powerline glyphs |
+| Dotfile mgmt | [GNU stow](https://www.gnu.org/software/stow/) | Symlink farm, XDG-aligned |
 
-## Installation
+All tools share the **Catppuccin Frappé** colour theme for a consistent look across terminal, prompt, editor, tmux, and git diffs.
+
+## Quick Start
 
 ```bash
 git clone https://github.com/tkaria/dotfiles.git ~/dotfiles
@@ -18,53 +25,56 @@ cd ~/dotfiles
 ./bootstrap.sh
 ```
 
-The bootstrap script will:
-1. Detect your OS (macOS / Linux)
-2. Install Homebrew (macOS) or update apt (Linux)
-3. Install all packages via `Brewfile` (macOS) or `packages/apt.txt` (Linux)
-4. Install [GNU stow](https://www.gnu.org/software/stow/) if not present
-5. Stow all packages — creates symlinks under `$HOME` / `$XDG_CONFIG_HOME`
-6. Install [Zinit](https://github.com/zdharma-continuum/zinit) (zsh plugin manager)
-7. Install [TPM](https://github.com/tmux-plugins/tpm) (tmux plugin manager)
-8. Optionally set zsh as your default shell
+Then complete the [post-install steps](#post-install-setup).
 
-Use `--dry-run` to preview without making changes:
+Use `--dry-run` to preview without changes:
 ```bash
 ./bootstrap.sh --dry-run
 ```
 
+## What `bootstrap.sh` does
+
+1. Detects OS (macOS / Linux)
+2. Installs Homebrew (macOS) or updates apt (Linux)
+3. Installs all packages via `Brewfile` / `packages/apt.txt`
+4. Installs GNU stow if absent
+5. Stows all packages — creates symlinks under `$HOME`
+6. Installs [Zinit](https://github.com/zdharma-continuum/zinit) (zsh plugin manager)
+7. Installs [TPM](https://github.com/tmux-plugins/tpm) (tmux plugin manager)
+8. Optionally sets zsh as your default shell
+
 ## Post-Install Setup
 
-### 1. Configure Git identity
+### 1. Git identity
 
 ```bash
 cp git/.config/git/config.local.example ~/.config/git/config.local
 $EDITOR ~/.config/git/config.local
 ```
 
-Fill in your name, email, and SSH signing key. This file is gitignored and never committed.
+Set your name, email, and SSH signing key. This file is gitignored — never committed.
 
-### 2. Add machine-specific shell settings
+### 2. Machine-specific shell settings
 
 ```bash
 cp zsh/.config/zsh/zshrc.local.example ~/.zshrc.local
 $EDITOR ~/.zshrc.local
 ```
 
-Put any machine-specific `PATH` additions, aliases, or tool integrations here.
+Put machine-specific `PATH` additions, aliases, and tool integrations here.
 
-### 3. Install tmux plugins
+### 3. Tmux plugins
 
-Start tmux, then press `prefix + I` (capital i) to install all plugins via TPM.
+Start tmux, then press `prefix + I` (capital i) to install plugins via TPM.
 
-### 4. Install Neovim plugins
+### 4. Neovim plugins
 
-Open Neovim — lazy.nvim will auto-install all plugins on first launch.
+Open Neovim — lazy.nvim auto-installs all plugins on first launch. Run `:MasonUpdate` to install LSP servers.
 
-### 5. Set terminal font
+### 5. Terminal font
 
-Set your terminal to use **BlexMono Nerd Font** for powerline glyphs:
-- **Ghostty**: already configured in `ghostty/.config/ghostty/config`
+Set your terminal to **BlexMono Nerd Font** for powerline glyphs:
+- **Ghostty**: already configured
 - **iTerm2**: Preferences → Profiles → Text → Font
 - **VSCode**: `"terminal.integrated.fontFamily": "BlexMono Nerd Font Mono"`
 
@@ -72,58 +82,54 @@ Set your terminal to use **BlexMono Nerd Font** for powerline glyphs:
 
 ```
 dotfiles/
-├── bootstrap.sh              # Idempotent installer (replaces setup.sh)
-├── Brewfile                  # macOS packages (declarative)
-├── packages/
-│   └── apt.txt               # Linux packages
-├── .stow-local-ignore        # Files stow should not symlink
+├── bootstrap.sh              # Idempotent installer
+├── Brewfile                  # macOS packages
+├── packages/apt.txt          # Linux packages
+├── .stow-local-ignore
 │
 ├── zsh/
-│   ├── .zshenv               # Sets ZDOTDIR → ~/.config/zsh (stowed to ~/.zshenv)
+│   ├── .zshenv                  # Sets ZDOTDIR (stowed to ~/.zshenv)
 │   └── .config/zsh/
-│       ├── .zshrc            # Main zsh config
-│       ├── zshrc.local.example  # Template for ~/.zshrc.local
-│       └── aliases.zsh       # (placeholder)
+│       ├── .zshrc               # Zinit + plugins + aliases
+│       └── zshrc.local.example  # Template for ~/.zshrc.local
 │
 ├── starship/
-│   └── .config/
-│       └── starship.toml     # Starship prompt config (placeholder, full config in phase 4)
+│   └── .config/starship.toml    # Agnoster-style Catppuccin prompt
 │
 ├── nvim/
-│   └── .config/nvim/         # Neovim config (full config added in phase 5)
+│   └── .config/nvim/
+│       ├── init.lua
+│       ├── stylua.toml
+│       └── lua/
+│           ├── config/          # options, keymaps, autocmds, lazy bootstrap
+│           └── plugins/         # ui, editor, git, lsp, completion, treesitter
 │
 ├── tmux/
-│   └── .config/tmux/
-│       └── tmux.conf         # Tmux config with TPM + catppuccin
+│   └── .config/tmux/tmux.conf   # TPM + catppuccin + resurrect
 │
 ├── git/
 │   └── .config/git/
-│       ├── config            # Main git config (no personal info)
-│       ├── ignore            # Global gitignore
-│       └── config.local.example  # Template for ~/.config/git/config.local
+│       ├── config               # delta, rerere, aliases (no PII)
+│       ├── ignore               # global gitignore
+│       └── config.local.example # template for identity + credentials
 │
 ├── ghostty/
-│   └── .config/ghostty/
-│       └── config            # Ghostty terminal config
+│   └── .config/ghostty/config   # Catppuccin Frappé, BlexMono
 │
 └── vim/
-    └── .vimrc                # Minimal fallback vim config (for SSH servers)
+    └── .vimrc                   # Minimal SSH fallback (no plugins)
 ```
 
 ## Stow Usage
 
-Install a single package:
 ```bash
+# Install a package
 stow -t ~ zsh
-```
 
-Remove a package (unlink):
-```bash
+# Remove a package
 stow -D -t ~ zsh
-```
 
-Reinstall all packages:
-```bash
+# Reinstall everything
 stow --restow -t ~ zsh starship nvim tmux git ghostty vim
 ```
 
@@ -131,32 +137,46 @@ stow --restow -t ~ zsh starship nvim tmux git ghostty vim
 
 ```bash
 cd ~/dotfiles
-git pull origin main
+git pull
 stow --restow -t ~ zsh starship nvim tmux git ghostty vim
 ```
+
+## Key Bindings
+
+### Tmux (prefix = `C-a`)
+
+| Key | Action |
+|-----|--------|
+| `prefix + \|` | Split horizontal |
+| `prefix + -` | Split vertical |
+| `prefix + h/j/k/l` | Navigate panes |
+| `prefix + H/J/K/L` | Resize panes |
+| `prefix + r` | Reload config |
+| `prefix + I` | Install plugins (TPM) |
+| `prefix + s` | Session picker |
+
+### Neovim (leader = `,`)
+
+| Key | Action |
+|-----|--------|
+| `<C-n>` | Toggle file tree (neo-tree) |
+| `<C-p>` | Find files (Telescope) |
+| `<leader>g` | Live grep |
+| `<leader>b` | Buffer list |
+| `<leader>gs` | Git status (fugitive) |
+| `<leader>rn` | LSP rename |
+| `<leader>ca` | LSP code action |
+| `<leader>f` | Format buffer |
+| `gd` | Go to definition |
+| `K` | Hover docs |
+| `]h` / `[h` | Next/prev git hunk |
+| `<leader><space>` | Clear search highlight |
 
 ## Customization
 
 - **Machine-specific shell**: `~/.zshrc.local` (gitignored)
-- **Machine-specific git**: `~/.config/git/config.local` (gitignored)
-- **Work vs personal git**: Use `[includeIf]` in `config.local` (see `config.local.example`)
-
-## Key Bindings
-
-### Tmux
-- `prefix` = `C-a`
-- `prefix + |` — split horizontal
-- `prefix + -` — split vertical
-- `prefix + h/j/k/l` — navigate panes
-- `prefix + H/J/K/L` — resize panes
-- `prefix + r` — reload config
-
-### Vim / Neovim
-- `<leader>` = `,`
-- `<C-n>` — toggle file tree
-- `<C-p>` — fuzzy file finder
-- `<leader>g` — live grep
-- `<leader>b` — buffer list
+- **Git identity**: `~/.config/git/config.local` (gitignored)
+- **Work vs personal git**: `[includeIf]` in `config.local` (see example)
 
 ## License
 
