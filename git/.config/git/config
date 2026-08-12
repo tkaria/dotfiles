@@ -8,6 +8,17 @@
 	precomposeunicode = false
 	# Speed up commands involving untracked files such as `git status`
 	untrackedCache = true
+	# Use delta as the pager
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	line-numbers = true
+	side-by-side = false
+	syntax-theme = Catppuccin Frappe
 
 # Uncomment to use delta as git pager (install via: brew install git-delta)
 # [core]
@@ -23,17 +34,22 @@
 	defaultBranch = main
 
 [pull]
-	rebase = false
+	rebase = true
 
 [push]
 	# Push only the current branch
 	default = simple
 	# Make `git push` automatically push relevant tags
 	followTags = true
+	# No more "--set-upstream" dance
+	autoSetupRemote = true
 
 [fetch]
 	# Remove any remote-tracking references that no longer exist on the remote
 	prune = true
+	pruneTags = true
+	# Speed up `git log` significantly
+	writeCommitGraph = true
 
 [diff]
 	# Detect copies as well as renames
@@ -49,7 +65,28 @@
 	# Include summaries of merged commits in newly created merge commit messages
 	log = true
 	# Show common ancestor code in conflict hunks
-	conflictstyle = diff3
+	conflictstyle = zdiff3
+
+[rebase]
+	autoStash = true
+	autoSquash = true
+	# git 2.38+: rebase stacked branches together
+	updateRefs = true
+
+[rerere]
+	enabled = true
+	autoupdate = true
+
+[branch]
+	# Most recently committed branches first
+	sort = -committerdate
+
+[tag]
+	sort = version:refname
+
+[column]
+	# Multi-column output for `git branch`, `git tag`
+	ui = auto
 
 [color]
 	ui = auto
