@@ -9,6 +9,16 @@
 	# Speed up commands involving untracked files such as `git status`
 	untrackedCache = true
 
+# Uncomment to use delta as git pager (install via: brew install git-delta)
+# [core]
+#     pager = delta
+# [interactive]
+#     diffFilter = delta --color-only
+# [delta]
+#     navigate = true
+#     line-numbers = true
+#     syntax-theme = Catppuccin-Frappe
+
 [init]
 	defaultBranch = main
 

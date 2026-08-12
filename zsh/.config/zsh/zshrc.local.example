@@ -1,0 +1,9 @@
+# ~/.zshrc.local  (gitignored — copy this file to ~/.zshrc.local)
+# Add machine-specific settings here. This file is sourced last by .zshrc.
+
+# Examples:
+# export PATH="$HOME/.npm-global/bin:$PATH"
+# export PATH="$PATH:$HOME/.lmstudio/bin"
+# eval "$(wsp completion zsh)"
+# alias pb="pbcopy <"
+# export ANTHROPIC_API_KEY="..."
