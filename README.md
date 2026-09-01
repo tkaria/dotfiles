@@ -1,291 +1,183 @@
 # Dotfiles
 
-My personal dotfiles for vim, git, and zsh. Works on both macOS and Linux.
+Personal dotfiles for zsh, neovim, tmux, git, and ghostty — managed with [GNU stow](https://www.gnu.org/software/stow/) and organized around the [XDG Base Directory spec](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html).
 
-## Features
+## Stack
 
-### Vim Configuration (.vimrc)
-- **vim-plug** plugin manager with auto-installation
-- Curated plugin set:
-  - NERDTree for file exploration
-  - FZF for fuzzy finding
-  - vim-fugitive and gitgutter for Git integration
-  - vim-airline for status line
-  - Solarized and Gruvbox color schemes
-  - Useful utilities (surround, commentary, auto-pairs)
-- Sensible defaults for editing
-- Smart search and navigation
-- Line numbers and visual feedback
+| Tool | Choice | Notes |
+|------|--------|-------|
+| Shell | zsh + [Zinit](https://github.com/zdharma-continuum/zinit) | Turbo async plugin loading |
+| Prompt | [Starship](https://starship.rs) | Agnoster-style, Catppuccin Frappé |
+| Editor | [Neovim](https://neovim.io) + [lazy.nvim](https://github.com/folke/lazy.nvim) | LSP, treesitter, telescope |
+| Multiplexer | [tmux](https://github.com/tmux/tmux) + [TPM](https://github.com/tmux-plugins/tpm) | Resurrect + continuum |
+| Git pager | [delta](https://github.com/dandavison/delta) | Catppuccin Frappé syntax theme |
+| Terminal | [Ghostty](https://ghostty.org) | Catppuccin Frappé theme |
+| Font | BlexMono Nerd Font | Powerline glyphs |
+| Dotfile mgmt | [GNU stow](https://www.gnu.org/software/stow/) | Symlink farm, XDG-aligned |
 
-### Zsh Configuration (.zshrc)
-- **oh-my-zsh** framework
-- Enhanced plugins:
-  - zsh-autosuggestions
-  - zsh-syntax-highlighting
-  - fast-syntax-highlighting
-  - zsh-autocomplete
-- Custom aliases for common tasks
-- Useful functions (mkcd, extract)
-- OS-specific configurations
-- Extended history settings
-- Support for local customizations via `~/.zshrc.local`
+All tools share the **Catppuccin Frappé** colour theme for a consistent look across terminal, prompt, editor, tmux, and git diffs.
 
-### Git Configuration (.gitconfig)
-- Comprehensive aliases (st, co, br, visual, etc.)
-- Better diff and merge settings
-- Color-coded output
-- Default branch and push behavior
-- URL shortcuts (gh:, gist:)
-- Auto-correct for mistyped commands
-
-### Tmux Configuration (.tmux.conf)
-- Better prefix key (Ctrl+a instead of Ctrl+b)
-- Mouse support enabled
-- Vim-style pane navigation (h, j, k, l)
-- Intuitive window splitting (| and -)
-- Enhanced status bar with colors
-- 50,000 line scrollback buffer
-- Copy mode with vim keybindings
-
-### Fonts
-- **BlexMono Nerd Font** (IBM Plex Mono patched with icons)
-- Installed automatically on both macOS and Linux
-- Enables powerline symbols in vim-airline
-- Provides icon glyphs for enhanced terminal experience
-
-### Ghostty Terminal Configuration (ghostty)
-- Modern terminal emulator configuration
-- Pre-configured with BlexMono Nerd Font
-- Shell integration for zsh
-- Sensible defaults for performance and appearance
-- Automatically symlinked to `~/.config/ghostty/config`
-
-### Setup Script (setup.sh)
-- Automatic OS detection (macOS/Linux)
-- Backs up existing dotfiles with timestamp
-- Creates symlinks to dotfiles
-- Installs required tools and dependencies
-- Installs BlexMono Nerd Font
-- Installs Ghostty terminal (macOS)
-- Sets up oh-my-zsh and plugins
-- Installs vim-plug
-- Sets zsh as default shell
-
-## Installation
-
-### Quick Start
+## Quick Start
 
 ```bash
-# Clone this repository
-git clone https://github.com/yourusername/dotfiles.git ~/dotfiles
-
-# Run the setup script
+git clone https://github.com/tkaria/dotfiles.git ~/dotfiles
 cd ~/dotfiles
-./setup.sh
+./bootstrap.sh
 ```
 
-The setup script will:
-1. Detect your OS (macOS or Linux)
-2. Backup existing dotfiles to `~/dotfiles_backup_TIMESTAMP`
-3. Create symlinks from your home directory to this repository
-4. Install necessary tools (Homebrew on macOS, apt/yum/pacman on Linux)
-5. Install BlexMono Nerd Font
-6. Install Ghostty terminal (macOS only)
-7. Install oh-my-zsh and plugins
-8. Install vim-plug
-9. Set zsh as your default shell
+Then complete the [post-install steps](#post-install-setup).
 
-### Manual Installation
+Use `--dry-run` to preview without changes:
+```bash
+./bootstrap.sh --dry-run
+```
 
-If you prefer to set up manually:
+## What `bootstrap.sh` does
+
+1. Detects OS (macOS / Linux)
+2. Installs Homebrew (macOS) or updates apt (Linux)
+3. Installs all packages via `Brewfile` / `packages/apt.txt`
+4. Installs GNU stow if absent
+5. Stows all packages — creates symlinks under `$HOME`
+6. Installs [Zinit](https://github.com/zdharma-continuum/zinit) (zsh plugin manager)
+7. Installs [TPM](https://github.com/tmux-plugins/tpm) (tmux plugin manager)
+8. Optionally sets zsh as your default shell
+
+## Post-Install Setup
+
+### 1. Git identity
 
 ```bash
-# Backup existing dotfiles
-mkdir -p ~/dotfiles_backup
-mv ~/.vimrc ~/.zshrc ~/.gitconfig ~/dotfiles_backup/
-
-# Create symlinks
-ln -s ~/dotfiles/.vimrc ~/.vimrc
-ln -s ~/dotfiles/.zshrc ~/.zshrc
-ln -s ~/dotfiles/.gitconfig ~/.gitconfig
-
-# Install oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-# Install vim-plug
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+cp git/.config/git/config.local.example ~/.config/git/config.local
+$EDITOR ~/.config/git/config.local
 ```
 
-## Post-Installation
+Set your name, email, and SSH signing key. This file is gitignored — never committed.
 
-### 1. Configure Terminal Font
-
-Set your terminal to use **BlexMono Nerd Font** for the best experience:
-
-- **Ghostty**: Already configured in the dotfiles (font is set automatically)
-- **iTerm2** (macOS): Preferences → Profiles → Text → Font → Select "BlexMono Nerd Font"
-- **Terminal.app** (macOS): Preferences → Profiles → Font → Change → Select "BlexMono Nerd Font"
-- **GNOME Terminal** (Linux): Preferences → Profile → Custom font → Select "BlexMono Nerd Font"
-- **Alacritty**: Edit `~/.config/alacritty/alacritty.yml` and set `font.normal.family: "BlexMono Nerd Font"`
-- **VSCode**: Set `"terminal.integrated.fontFamily": "BlexMono Nerd Font Mono"`
-
-### 2. Configure Git User Information
-
-Copy the example config and fill in your details:
+### 2. Machine-specific shell settings
 
 ```bash
-cp git/config.local.example ~/.config/git/config.local
-vim ~/.config/git/config.local
+cp zsh/.config/zsh/zshrc.local.example ~/.zshrc.local
+$EDITOR ~/.zshrc.local
 ```
 
-Set your name, email, and signing key in `~/.config/git/config.local`. This file is gitignored and will never be committed.
+Put machine-specific `PATH` additions, aliases, and tool integrations here.
 
-### 3. Install Vim Plugins
+### 3. Tmux plugins
 
-Open vim and run:
+Start tmux, then press `prefix + I` (capital i) to install plugins via TPM.
 
-```vim
-:PlugInstall
-```
+### 4. Neovim plugins
 
-This will install all the plugins defined in `.vimrc`.
+Open Neovim — lazy.nvim auto-installs all plugins on first launch. Run `:MasonUpdate` to install LSP servers.
 
-### 4. Restart Your Terminal
+### 5. Terminal font
 
-Restart your terminal or run:
-
-```bash
-source ~/.zshrc
-```
-
-### 5. Optional Customizations
-
-Create a `~/.zshrc.local` file for machine-specific settings that won't be tracked in git:
-
-```bash
-# Example ~/.zshrc.local
-export PATH="$HOME/custom/bin:$PATH"
-alias customalias="some command"
-```
-
-## Updating
-
-To update your dotfiles:
-
-```bash
-cd ~/dotfiles
-git pull origin main
-```
-
-If you've added new vim plugins to `.vimrc`, run `:PlugInstall` in vim.
-
-If you've added new zsh plugins, restart your terminal or run `source ~/.zshrc`.
-
-## Customization
-
-### Adding Vim Plugins
-
-Edit `.vimrc` and add plugins in the vim-plug section:
-
-```vim
-call plug#begin('~/.vim/plugged')
-Plug 'author/plugin-name'
-call plug#end()
-```
-
-Then run `:PlugInstall` in vim.
-
-### Adding Zsh Plugins
-
-For oh-my-zsh plugins, add them to the `plugins` array in `.zshrc`:
-
-```bash
-plugins=(
-  git
-  # add your plugin here
-)
-```
-
-### Adding Git Aliases
-
-Add aliases to the `[alias]` section in `.gitconfig`:
-
-```gitconfig
-[alias]
-  myalias = command here
-```
-
-## Key Bindings
-
-### Vim
-- `<C-n>` - Toggle NERDTree
-- `<C-p>` - Open FZF file finder
-- `<leader>b` - Browse open buffers
-- `<leader>g` - Search with ripgrep
-- `<leader><space>` - Clear search highlighting
-- `<leader>l` - Toggle whitespace visualization
-- `j/k` - Move by visual lines
-
-### Zsh
-- `Ctrl+R` - Search command history
-- `Tab` - Autocomplete with menu
-- Arrow keys navigate suggestions from zsh-autosuggestions
+Set your terminal to **BlexMono Nerd Font** for powerline glyphs:
+- **Ghostty**: already configured
+- **iTerm2**: Preferences → Profiles → Text → Font
+- **VSCode**: `"terminal.integrated.fontFamily": "BlexMono Nerd Font Mono"`
 
 ## Directory Structure
 
 ```
 dotfiles/
-├── .gitconfig       # Git configuration
-├── .gitignore       # Gitignore rules
-├── .tmux.conf      # Tmux configuration
-├── .vimrc          # Vim configuration
-├── .zshrc          # Zsh configuration
-├── ghostty         # Ghostty terminal configuration
+├── bootstrap.sh              # Idempotent installer
+├── Brewfile                  # macOS packages
+├── packages/apt.txt          # Linux packages
+├── .stow-local-ignore
+│
+├── zsh/
+│   ├── .zshenv                  # Sets ZDOTDIR (stowed to ~/.zshenv)
+│   └── .config/zsh/
+│       ├── .zshrc               # Zinit + plugins + aliases
+│       └── zshrc.local.example  # Template for ~/.zshrc.local
+│
+├── starship/
+│   └── .config/starship.toml    # Agnoster-style Catppuccin prompt
+│
+├── nvim/
+│   └── .config/nvim/
+│       ├── init.lua
+│       ├── stylua.toml
+│       └── lua/
+│           ├── config/          # options, keymaps, autocmds, lazy bootstrap
+│           └── plugins/         # ui, editor, git, lsp, completion, treesitter
+│
+├── tmux/
+│   └── .config/tmux/tmux.conf   # TPM + catppuccin + resurrect
+│
 ├── git/
-│   └── config.local.example  # Template for ~/.config/git/config.local
-├── setup.sh        # Setup script
-└── README.md       # This file
+│   └── .config/git/
+│       ├── config               # delta, rerere, aliases (no PII)
+│       ├── ignore               # global gitignore
+│       └── config.local.example # template for identity + credentials
+│
+├── ghostty/
+│   └── .config/ghostty/config   # Catppuccin Frappé, BlexMono
+│
+└── vim/
+    └── .vimrc                   # Minimal SSH fallback (no plugins)
 ```
 
-## Troubleshooting
-
-### Zsh plugins not loading
-
-Make sure the plugins are installed:
+## Stow Usage
 
 ```bash
-ls ~/.oh-my-zsh/custom/plugins/
+# Install a package
+stow -t ~ zsh
+
+# Remove a package
+stow -D -t ~ zsh
+
+# Reinstall everything
+stow --restow -t ~ zsh starship nvim tmux git ghostty vim
 ```
 
-If missing, run the relevant installation commands from `setup.sh`.
-
-### Vim plugins not working
-
-Run `:PlugInstall` in vim and restart vim.
-
-### Permission issues with setup.sh
-
-Make sure the script is executable:
+## Updating
 
 ```bash
-chmod +x ~/dotfiles/setup.sh
+cd ~/dotfiles
+git pull
+stow --restow -t ~ zsh starship nvim tmux git ghostty vim
 ```
 
-### Colors not working in vim
+## Key Bindings
 
-Make sure your terminal supports 256 colors. For iTerm2, this should work by default. For other terminals, you may need to set:
+### Tmux (prefix = `C-a`)
 
-```bash
-export TERM=xterm-256color
-```
+| Key | Action |
+|-----|--------|
+| `prefix + \|` | Split horizontal |
+| `prefix + -` | Split vertical |
+| `prefix + h/j/k/l` | Navigate panes |
+| `prefix + H/J/K/L` | Resize panes |
+| `prefix + r` | Reload config |
+| `prefix + I` | Install plugins (TPM) |
+| `prefix + s` | Session picker |
+
+### Neovim (leader = `,`)
+
+| Key | Action |
+|-----|--------|
+| `<C-n>` | Toggle file tree (neo-tree) |
+| `<C-p>` | Find files (Telescope) |
+| `<leader>g` | Live grep |
+| `<leader>b` | Buffer list |
+| `<leader>gs` | Git status (fugitive) |
+| `<leader>rn` | LSP rename |
+| `<leader>ca` | LSP code action |
+| `<leader>f` | Format buffer |
+| `gd` | Go to definition |
+| `K` | Hover docs |
+| `]h` / `[h` | Next/prev git hunk |
+| `<leader><space>` | Clear search highlight |
+
+## Customization
+
+- **Machine-specific shell**: `~/.zshrc.local` (gitignored)
+- **Git identity**: `~/.config/git/config.local` (gitignored)
+- **Work vs personal git**: `[includeIf]` in `config.local` (see example)
 
 ## License
 
-Feel free to use and modify these dotfiles for your own setup.
-
-## Acknowledgments
-
-- Inspired by various dotfiles repositories in the community
-- vim-plug by junegunn
-- oh-my-zsh by the oh-my-zsh community
+Feel free to use and adapt.
